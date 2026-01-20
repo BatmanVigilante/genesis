@@ -39,7 +39,7 @@ class _GenesisScreenState extends State<GenesisScreen> {
   final TextEditingController _verseController = TextEditingController();
   final TextEditingController _referenceController = TextEditingController();
   Future<String> _formatTimestamp(DateTime time) async {
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 10));
     return '${time.toLocal().hour}:${time.toLocal().minute}:${time.toLocal().second}';
   }
 
@@ -73,6 +73,8 @@ class _GenesisScreenState extends State<GenesisScreen> {
                   _verse = _verseController.text;
                   _reference = _referenceController.text;
                   _createdAt = DateTime.now();
+                  _verseController.clear();
+                  _referenceController.clear();
                 });
               },
               child: const Text('Create Verse Ahora'),

@@ -22,14 +22,39 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key}); //constructor
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Scaffold());
+    return MaterialApp(home: GenesisScreen());
   }
 }
 
-// class GenesisPage extends StatefulWidget {}
+class GenesisScreen extends StatefulWidget {
+  const GenesisScreen({super.key});
+  @override
+  State<GenesisScreen> createState() => _GenesisScreenState();
+}
 
-// class _GenesisPageState extends State<GenesisPage> {
-//   String verseText = '';
-//   String verseRef = '';
-//   DateTime? createdAt;
-// }
+class _GenesisScreenState extends State<GenesisScreen> {
+  final TextEditingController _verseController = TextEditingController();
+  final TextEditingController _referenceController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Genesis')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            TextField(
+              controller: _verseController,
+              decoration: const InputDecoration(labelText: 'Verse'),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: _referenceController,
+              decoration: const InputDecoration(labelText: 'Reference'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

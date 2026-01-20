@@ -93,9 +93,23 @@ class _GenesisScreenState extends State<GenesisScreen> {
                 style: const TextStyle(fontStyle: FontStyle.italic),
               ),
               if (_createdAt != null)
-                Text(
-                  'Created at: ${_createdAt!.toLocal()}',
-                  style: const TextStyle(fontSize: 12),
+                FutureBuilder<String>(
+                  future: _formatTimestamp(_createdAt!),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Text(
+                        'Loading... Read this JOKE and laugh: `"Why couldn\'t the dad help his son put his shoes on? They weren\'t the dad\'s size! ',
+                        style: TextStyle(fontSize: 12),
+                      );
+                    }
+                    if (snapshot.hasData) {
+                      return Text(
+                        'Created at: ${snapshot.data}',
+                        style: const TextStyle(fontSize: 12),
+                      );
+                    }
+                    return const SizedBox.shrink();
+                  },
                 ),
             ],
           ],

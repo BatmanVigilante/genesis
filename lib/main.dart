@@ -18,13 +18,13 @@ void main() {
   runApp(MyApp());
 }
 
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key}); //constructor
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(home: Scaffold());
-//   }
-// }
+class MyApp extends StatelessWidget {
+  const MyApp({super.key}); //constructor
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp();
+  }
+}
 
 // class GenesisPage extends StatefulWidget {}
 

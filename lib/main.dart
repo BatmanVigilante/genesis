@@ -33,9 +33,23 @@ class GenesisScreen extends StatefulWidget {
 }
 
 class _GenesisScreenState extends State<GenesisScreen> {
+  String _verse = '';
+  String _reference = '';
+  DateTime? _createdAt;
   final TextEditingController _verseController = TextEditingController();
   final TextEditingController _referenceController = TextEditingController();
+  Future<String> _formatTimestamp(DateTime time) async {
+    await Future.delayed(const Duration(seconds: 3));
+    return '${time.toLocal().hour}:${time.toLocal().minute}:${time.toLocal().second}';
+  }
+
   @override
+  void dispose() {
+    _verseController.dispose();
+    _referenceController.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Genesis')),
@@ -52,6 +66,38 @@ class _GenesisScreenState extends State<GenesisScreen> {
               controller: _referenceController,
               decoration: const InputDecoration(labelText: 'Reference'),
             ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  _verse = _verseController.text;
+                  _reference = _referenceController.text;
+                  _createdAt = DateTime.now();
+                });
+              },
+              child: const Text('Create Verse Ahora'),
+            ),
+            if (_verse.isNotEmpty && _reference.isNotEmpty) ...[
+              const SizedBox(height: 24),
+              Text(
+                _verse,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                '- $_reference',
+                style: const TextStyle(fontStyle: FontStyle.italic),
+              ),
+              if (_createdAt != null)
+                Text(
+                  'Created at: ${_createdAt!.toLocal()}',
+                  style: const TextStyle(fontSize: 12),
+                ),
+            ],
           ],
         ),
       ),

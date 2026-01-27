@@ -108,7 +108,7 @@ class _GenesisScreenState extends State<GenesisScreen> {
                     if (snapshot.hasData) {
                       return Text(
                         'Created at: ${snapshot.data}',
-                        style: const TextStyle(fontSize: 12),
+                        style: const TextStyle(fontSize: 13),
                       );
                     }
                     return const SizedBox.shrink();

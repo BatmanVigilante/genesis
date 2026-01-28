@@ -102,7 +102,7 @@ class _GenesisScreenState extends State<GenesisScreen> {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Text(
                         'Loading... Read this JOKE and laugh: `"Why couldn\'t the dad help his son put his shoes on? They weren\'t the dad\'s size! ',
-                        style: TextStyle(fontSize: 12),
+                        style: TextStyle(fontSize: 14),
                       );
                     }
                     if (snapshot.hasData) {
